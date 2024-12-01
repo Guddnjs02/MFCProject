@@ -54,8 +54,6 @@ CMFCProjectDlg::CMFCProjectDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_MFCPROJECT_DIALOG, pParent)
 	, m_nAge(0)
 	, m_bMale(FALSE)
-	, m_bFemale(FALSE)
-	, m_bFemale(FALSE)
 	, m_nHeight(0)
 	, m_nWeight(0)
 	, m_strActivity(_T(""))
@@ -66,26 +64,33 @@ CMFCProjectDlg::CMFCProjectDlg(CWnd* pParent /*=nullptr*/)
 void CMFCProjectDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_EDIT_AGE, m_nAge);
-	DDX_Control(pDX, IDC_RADIO_MALE, m_bMale);
-	DDX_Control(pDX, IDC_RADIO_FEMALE, m_bFemale);
-	DDX_Control(pDX, IDC_RADIO_FEMALE, m_bFemale);
-	DDX_Control(pDX, IDC_EDIT_HEIGHT, m_nHeight);
-	DDX_Control(pDX, IDC_EDIT_WEIGHT, m_nWeight);
-	DDX_Control(pDX, IDC_COMBO_ACTIVITY, m_strActivity);
+
+	// 나이
+	DDX_Text(pDX, IDC_EDIT_AGE, m_nAge);
+
+	// 성별 (라디오 버튼 그룹)
+	DDX_Radio(pDX, IDC_RADIO_MALE, m_bMale);
+
+	// 키와 몸무게
+	DDX_Text(pDX, IDC_EDIT_HEIGHT, m_nHeight);
+	DDX_Text(pDX, IDC_EDIT_WEIGHT, m_nWeight);
+
+	// 운동 빈도수 (콤보 박스)
+	DDX_CBString(pDX, IDC_COMBO_ACTIVITY, m_strActivity);
 }
+
 
 BEGIN_MESSAGE_MAP(CMFCProjectDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_STN_CLICKED(IDC_STATIC_AGE, &CMFCProjectDlg::OnStnClickedStaticAge)
-	ON_EN_CHANGE(IDC_EDIT1, &CMFCProjectDlg::OnEnChangeEdit1)
 	ON_EN_CHANGE(IDC_EDIT_AGE, &CMFCProjectDlg::OnEnChangeEditAge)
-	ON_BN_CLICKED(IDC_RADIO_MALE, &CMFCProjectDlg::OnBnClickedRadioMale)
 	ON_BN_CLICKED(IDOK, &CMFCProjectDlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_BUTTON_SUBMIT, &CMFCProjectDlg::OnClickedSubmit)
+	ON_CBN_SELCHANGE(IDC_COMBO_ACTIVITY, &CMFCProjectDlg::OnCbnSelchangeComboActivity)
 END_MESSAGE_MAP()
+
 
 
 // CMFCProjectDlg 메시지 처리기
@@ -121,8 +126,18 @@ BOOL CMFCProjectDlg::OnInitDialog()
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
 
+	// 콤보 상자에 항목 추가
+	CComboBox* pComboBox = (CComboBox*)GetDlgItem(IDC_COMBO_ACTIVITY); // 콤보 상자 가져오기
+	if (pComboBox)
+	{
+		pComboBox->AddString(_T("1회/주"));
+		pComboBox->AddString(_T("2~3회/주"));
+		pComboBox->AddString(_T("4회 이상/주"));
+	}
+
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
+
 
 void CMFCProjectDlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
@@ -205,19 +220,18 @@ void CMFCProjectDlg::OnEnChangeEditAge()
 
 void CMFCProjectDlg::OnBnClickedRadioMale()
 {
-	// UI → 변수로 데이터 전송
-	UpdateData(TRUE);
+	UpdateData(TRUE); // UI → 변수로 데이터 가져오기
 
 	CString strMessage;
 
-	if (m_bMale) // m_bMale이 TRUE라면 남자가 선택된 상태
+	if (m_bMale == 0) // m_bMale이 0이면 남자
 		strMessage = _T("성별: 남자");
-	else // m_bMale이 FALSE라면 여자 선택
+	else if (m_bMale == 1) // m_bMale이 1이면 여자
 		strMessage = _T("성별: 여자");
 
-	// 선택된 성별을 메시지 박스로 출력
-	AfxMessageBox(strMessage);
+	AfxMessageBox(strMessage); // 메시지 출력
 }
+
 
 
 
@@ -230,19 +244,29 @@ void CMFCProjectDlg::OnBnClickedOk()
 
 void CMFCProjectDlg::OnClickedSubmit()
 {
-	// UI → 변수로 데이터 전송
-	UpdateData(TRUE);
+	UpdateData(TRUE); // UI → 변수로 데이터 가져오기
 
 	CString strMessage;
 
-	// 나이, 성별, 키, 몸무게, 운동 빈도수 값 읽기
-	strMessage.Format(_T("나이: %d\n성별: %s\n키: %d cm\n몸무게: %d kg\n운동 빈도수: %s"),
-		m_nAge,
-		m_bMale ? _T("남자") : _T("여자"),
-		m_nHeight,
-		m_nWeight,
-		m_strActivity);
+	// 성별 판별
+	if (m_bMale == 0) // 0: 남자
+	{
+		strMessage = _T("성별: 남자");
+	}
+	else if (m_bMale == 1) // 1: 여자
+	{
+		strMessage = _T("성별: 여자");
+	}
 
-	// 메시지 박스 출력
+	// 메시지 출력
 	AfxMessageBox(strMessage);
+}
+
+
+
+
+
+void CMFCProjectDlg::OnCbnSelchangeComboActivity()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }

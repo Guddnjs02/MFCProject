@@ -14,7 +14,6 @@
 #define IDC_EDIT_HEIGHT                 1004
 #define IDC_EDIT_WEIGHT                 1005
 #define IDC_COMBO_ACTIVITY              1006
-#define IDC_BUTTON1                     1007
 #define IDC_BUTTON_SUBMIT               1007
 
 // Next default values for new objects
