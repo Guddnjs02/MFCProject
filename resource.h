@@ -7,7 +7,6 @@
 #define IDS_ABOUTBOX                    101
 #define IDD_MFCPROJECT_DIALOG           102
 #define IDR_MAINFRAME                   128
-#define IDD_NEXT_DIALOG                 132
 #define IDD_BODY_CARE_RESULT            132
 #define IDC_STATIC_AGE                  1000
 #define IDC_EDIT_AGE                    1001
@@ -17,6 +16,7 @@
 #define IDC_EDIT_WEIGHT                 1005
 #define IDC_COMBO_ACTIVITY              1006
 #define IDC_BUTTON_SUBMIT               1007
+#define IDC_COMBO1                      1009
 
 // Next default values for new objects
 // 
@@ -24,7 +24,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        134
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1009
+#define _APS_NEXT_CONTROL_VALUE         1010
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
