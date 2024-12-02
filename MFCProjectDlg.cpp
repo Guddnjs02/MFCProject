@@ -130,9 +130,11 @@ BOOL CMFCProjectDlg::OnInitDialog()
 	CComboBox* pComboBox = (CComboBox*)GetDlgItem(IDC_COMBO_ACTIVITY); // 콤보 상자 가져오기
 	if (pComboBox)
 	{
-		pComboBox->AddString(_T("1회/주"));
-		pComboBox->AddString(_T("2~3회/주"));
-		pComboBox->AddString(_T("4회 이상/주"));
+		pComboBox->AddString(_T("아주 낮음(거의 운동하지 않음)"));
+		pComboBox->AddString(_T("낮음(주 1~3일 가벼운 운동)"));
+		pComboBox->AddString(_T("보통(주 3~5일 중간 강도 운동)"));
+		pComboBox->AddString(_T("높음(주 6~7일 고강도 운동)"));
+		pComboBox->AddString(_T("매우 높음(매일 고강도 운동 + 육체적 직업)"));
 	}
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
