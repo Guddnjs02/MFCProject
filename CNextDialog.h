@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-// CNextDialog 대화 상자
 class CNextDialog : public CDialogEx
 {
 	DECLARE_DYNAMIC(CNextDialog)
@@ -11,7 +10,7 @@ public:
 
 	// 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_NEXT_DIALOG };
+	enum { IDD = IDD_BODY_CARE_RESULT };
 #endif
 
 protected:
@@ -20,12 +19,15 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	// 대화 상자 초기화
-	virtual BOOL OnInitDialog();
-
-	// 버튼 핸들러
-	afx_msg void OnBnClickedButtonOk();
-
 	// 멤버 변수
-	CString m_strUserInput;  // 사용자 입력 데이터
+	int m_basalMetabolicRate;   // 기초대사량
+	int m_activityMetabolicRate; // 활동대사량
+	int m_recommendedCalories;  // 권장 섭취칼로리
+	float m_bmi;                // BMI
+	int m_carbGrams;            // 탄수화물
+	int m_proteinGrams;         // 단백질
+	int m_fatGrams;             // 지방
+
+	// 메시지 핸들러
+	virtual BOOL OnInitDialog();
 };

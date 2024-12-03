@@ -1,10 +1,5 @@
-﻿// MFCProjectDlg.h: 헤더 파일
-//
+﻿#pragma once
 
-#pragma once
-
-
-// CMFCProjectDlg 대화 상자
 class CMFCProjectDlg : public CDialogEx
 {
 	// 생성입니다.
@@ -19,7 +14,7 @@ public:
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 지원입니다.
 
-// 구현입니다.
+	// 구현입니다.
 protected:
 	HICON m_hIcon;
 
@@ -28,22 +23,28 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
+	afx_msg void OnCbnSelchangeComboGoal();
 	DECLARE_MESSAGE_MAP()
 
-	// 사용자 정의 멤버 변수
+private:
+	// 계산 함수
+	int CalculateBMR(int age, bool isMale, int height, int weight); // BMR 계산
+	float CalculateBMI(int height, int weight); // BMI 계산
+	int CalculateActivityMetabolicRate(int bmr, CString activityLevel); // 활동대사량 계산
+	void CalculateNutrients(int totalCalories, int& carbs, int& protein, int& fat);
+
+
 public:
-	// 나이
+	// 멤버 변수
 	int m_nAge;
-
-	// 성별
-	int m_bMale; // 라디오 버튼의 첫 번째 항목과 연결 (0: 남자, 1: 여자)
-
-	// 키와 몸무게
-	int m_nHeight;  // 키
-	int m_nWeight;  // 몸무게
-
-	// 운동 빈도수 (콤보 박스)
+	BOOL m_bMale;
+	int m_nHeight;
+	int m_nWeight;
 	CString m_strActivity;
+	CString m_strGoal;
+	// 대사량 관련 변수
+	int m_basalMetabolicRate;   // 기초대사량
+	int m_activityMetabolicRate; // 활동대사량
 
 	// 메시지 핸들러
 	afx_msg void OnStnClickedStaticAge();
