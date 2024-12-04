@@ -2,11 +2,12 @@
 #include "MFCProject.h"
 #include "CNextDialog.h"
 #include "afxdialogex.h"
+#include "heartlate.h"
 
 IMPLEMENT_DYNAMIC(CNextDialog, CDialogEx)
 
-CNextDialog::CNextDialog(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_BODY_CARE_RESULT, pParent)
+CNextDialog::CNextDialog(int weight, CWnd* pParent /*=nullptr*/)
+    : CDialogEx(IDD_BODY_CARE_RESULT, pParent)
 	, m_basalMetabolicRate(0)
 	, m_activityMetabolicRate(0)
 	, m_recommendedCalories(0)
@@ -14,6 +15,7 @@ CNextDialog::CNextDialog(CWnd* pParent /*=nullptr*/)
 	, m_carbGrams(0)
 	, m_proteinGrams(0)
 	, m_fatGrams(0)
+    , m_nWeight(weight)
 {
 }
 
@@ -27,6 +29,8 @@ void CNextDialog::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CNextDialog, CDialogEx)
+    ON_STN_CLICKED(IDC_STATIC_CARBOHYDRATES, &CNextDialog::OnStnClickedStaticCarbohydrates)
+    ON_BN_CLICKED(IDOK, &CNextDialog::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 BOOL CNextDialog::OnInitDialog()
@@ -60,3 +64,20 @@ BOOL CNextDialog::OnInitDialog()
     return TRUE;
 }
 
+
+
+void CNextDialog::OnStnClickedStaticCarbohydrates()
+{
+    // TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CNextDialog::OnBnClickedOk()
+{
+    // TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+     // heartlate 대화상자 객체 생성 - 실제 몸무게 값을 생성자에 전달
+    heartlate dlg(m_nWeight);
+    dlg.DoModal();  // 대화상자 표시
+
+    CDialogEx::OnOK();
+}

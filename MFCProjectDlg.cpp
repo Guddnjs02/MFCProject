@@ -43,7 +43,7 @@ void CMFCProjectDlg::OnClickedSubmit()
 	UpdateData(TRUE); // H1에서 입력된 데이터를 업데이트
 
 	// H2 대화 상자 생성
-	CNextDialog dlgNext;
+	CNextDialog dlgNext(m_nWeight);
 
 	// H1 데이터를 기반으로 계산
 	dlgNext.m_basalMetabolicRate = CalculateBMR(m_nAge, m_bMale, m_nHeight, m_nWeight);

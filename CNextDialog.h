@@ -5,7 +5,7 @@ class CNextDialog : public CDialogEx
 	DECLARE_DYNAMIC(CNextDialog)
 
 public:
-	CNextDialog(CWnd* pParent = nullptr);   // 표준 생성자입니다.
+	CNextDialog(int weight, CWnd* pParent = nullptr);
 	virtual ~CNextDialog();
 
 	// 대화 상자 데이터입니다.
@@ -17,6 +17,10 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 
 	DECLARE_MESSAGE_MAP()
+
+private:
+	int m_nWeight; // 몸무게 멤버 변수 추가
+
 
 public:
 	// 멤버 변수
@@ -30,4 +34,6 @@ public:
 
 	// 메시지 핸들러
 	virtual BOOL OnInitDialog();
+	afx_msg void OnStnClickedStaticCarbohydrates();
+	afx_msg void OnBnClickedOk();
 };
