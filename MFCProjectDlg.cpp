@@ -8,7 +8,7 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-
+// ff
 CMFCProjectDlg::CMFCProjectDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_MFCPROJECT_DIALOG, pParent)
 	, m_nAge(0)
