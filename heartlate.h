@@ -31,4 +31,5 @@ public:
 	afx_msg void OnCbnSelchangeCombo1();
 	afx_msg void OnCbnSelchangeExerciseCombo();
 	afx_msg void OnEnChangeinputkcal();
+	afx_msg void OnStnClickedStaticImage();
 };

@@ -7,6 +7,7 @@
 #include "heartlate.h"
 #include "afxwin.h"
 
+
 // heartlate 대화 상자
 
 IMPLEMENT_DYNAMIC(heartlate, CDialogEx)
@@ -14,9 +15,6 @@ IMPLEMENT_DYNAMIC(heartlate, CDialogEx)
 heartlate::heartlate(int weight, CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_heartrate, pParent), m_nWeight(weight) // 초기화
 {
-	CString debugMessage;
-	debugMessage.Format(_T("초기화된 몸무게: %d kg"), m_nWeight);
-	AfxMessageBox(debugMessage);
 }
 
 heartlate::~heartlate()
@@ -34,6 +32,7 @@ BEGIN_MESSAGE_MAP(heartlate, CDialogEx)
 	ON_CBN_SELCHANGE(IDC_COMBO1, &heartlate::OnCbnSelchangeCombo1)
 	ON_CBN_SELCHANGE(IDC_EXERCISE_COMBO, &heartlate::OnCbnSelchangeExerciseCombo)
 	ON_EN_CHANGE(IDC_input_kcal, &heartlate::OnEnChangeinputkcal)
+	ON_STN_CLICKED(IDC_STATIC_IMAGE, &heartlate::OnStnClickedStaticImage)
 END_MESSAGE_MAP()
 
 
@@ -170,5 +169,13 @@ BOOL heartlate::OnInitDialog()
 	// 기본값 선택
 	pCombo->SetCurSel(0);
 
+	CStatic* pImage = (CStatic*)GetDlgItem(IDC_STATIC_IMAGE);
+	pImage->SetBitmap(::LoadBitmap(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_MYIMAGE)));
+
 	return TRUE;
+}
+
+void heartlate::OnStnClickedStaticImage()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
