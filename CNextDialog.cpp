@@ -3,6 +3,7 @@
 #include "CNextDialog.h"
 #include "afxdialogex.h"
 #include "heartlate.h"
+#include "MFCProjectDlg.h"
 
 IMPLEMENT_DYNAMIC(CNextDialog, CDialogEx)
 
@@ -31,6 +32,7 @@ void CNextDialog::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CNextDialog, CDialogEx)
     ON_STN_CLICKED(IDC_STATIC_CARBOHYDRATES, &CNextDialog::OnStnClickedStaticCarbohydrates)
     ON_BN_CLICKED(IDOK, &CNextDialog::OnBnClickedOk)
+    ON_BN_CLICKED(IDC_BUTTON_BACK, &CNextDialog::OnBnClickedButtonBack)
 END_MESSAGE_MAP()
 
 BOOL CNextDialog::OnInitDialog()
@@ -81,3 +83,14 @@ void CNextDialog::OnBnClickedOk()
 
     CDialogEx::OnOK();
 }
+
+void CNextDialog::OnBnClickedButtonBack()
+{
+    // 현재 H2 대화 상자 닫기
+    EndDialog(IDCANCEL); // H2를 종료
+
+    // H1(MFCProjectDlg) 대화 상자를 다시 실행
+    CMFCProjectDlg dlgPrev; // H1 객체 생성
+    dlgPrev.DoModal(); // H1 대화 상자 표시
+}
+
